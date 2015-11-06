@@ -110,8 +110,8 @@ extern "C" {
 
 
     /** configuration parameters for the parser, these may be passed to
-     *  yajl_config() along with option specific argument(s).  In general,
-     *  all configuration parameters default to *off*. */
+     *  yajl_config() and yajl_config_option() along with option specific
+     *  argument(s). In general, all configuration parameters default to *off*. */
     typedef enum {
         /** Ignore javascript style comments present in
          *  JSON input.  Non-standard, but rather fun
@@ -164,6 +164,14 @@ extern "C" {
      *  \returns zero in case of errors, non-zero otherwise
      */
     YAJL_API int yajl_config(yajl_handle h, yajl_option opt, ...);
+
+    /** allow the modification of parser options subsequent to handle
+     *  allocation (via yajl_alloc).  This single-option alternative
+     *  to the varargs yajl_config() is compatible with calling from
+     *  other languages.
+     *  \returns zero in case of errors, non-zero otherwise
+     */
+    YAJL_API int yajl_config_option(yajl_handle h, yajl_option opt, int enable);
 
     /** free a parser handle */
     YAJL_API void yajl_free(yajl_handle handle);
